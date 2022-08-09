@@ -1,0 +1,9 @@
+.item {
+  margin-bottom: 5px;
+  padding-left: 20px;
+  font-size: 15px;
+  background-color: #fff;
+  border: 1px solid rgb(45, 80, 133);
+  border-radius: 2rem;
+  color: rgb(11, 11, 11);
+}

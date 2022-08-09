@@ -1,0 +1,47 @@
+.postsBlock {
+  padding: 10px;
+}
+
+.headline {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.newPostArea {
+  width: 50%;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  margin-bottom: 10px;
+  resize: none;
+  outline: none;
+}
+
+.newPostArea:focus {
+  border: 1px solid rgb(3, 91, 223);
+}
+
+.buttonsArea {
+  margin-bottom: 20px;
+}
+
+.button {
+  box-sizing: border-box;
+  font-family: inherit;
+  padding: 8px 10px;
+  border-radius: 2rem;
+  box-shadow: shadow(low);
+  border: 1px solid rgb(3, 91, 223);
+  background-color: #fff;
+  color: rgb(3, 91, 223);
+  font-size: 14px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.button:hover {
+  background-color: rgb(3, 91, 223);
+  color: #fff;
+}

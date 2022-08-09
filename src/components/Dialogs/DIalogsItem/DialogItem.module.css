@@ -1,0 +1,20 @@
+.dialog {
+  max-width: 120px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.dialogLink {
+  display: block;
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+}
+
+.active {
+  color: black;
+  background: #fff;
+  border-radius: 10px 10px;
+  padding: 5px;
+  padding-right: 120px;
+}
