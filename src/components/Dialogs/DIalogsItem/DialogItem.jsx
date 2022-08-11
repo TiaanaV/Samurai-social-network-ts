@@ -13,6 +13,7 @@ const DialogItem = (props) => {
         }
         to={path}
       >
+        <img className={classes.avatar} src={props.avatar} />
         {props.name}
       </NavLink>
     </div>

@@ -4,7 +4,7 @@
   padding: 15px;
 }
 
-.item{
+.item {
   margin: 10px;
   padding-bottom: 5px;
   color: rgb(117, 116, 116);
@@ -16,7 +16,34 @@
 .active {
   padding: 7px;
   color: rgb(22, 20, 20);
-  background:#fff;
+  background: #fff;
   border-radius: 5px 5px;
   background-size: 150%;
+}
+
+.popularFriendsSection {
+  margin: 50px 5px 0;
+  text-align: center;
+  color: rgb(0, 133, 199);
+  text-decoration: none;
+  font-size: 23px;
+  font-weight: 400;
+}
+
+.navbarFriends {
+  margin-top: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.navbarFriendAva {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 50%;
+}
+
+.friendsNames {
+  color: black;
+  font-size: 12px;
 }

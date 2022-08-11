@@ -2,58 +2,41 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./Navbar.module.css";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const links = [
+    { path: "/profile", nameOfPage: "Profile" },
+    { path: "/dialogs", nameOfPage: "Messages" },
+    { path: "/news", nameOfPage: "News" },
+    { path: "/music", nameOfPage: "Music" },
+    { path: "/settings", nameOfPage: "Settings" },
+    { path: "/friends", nameOfPage: "Friends" },
+  ];
+  let friendsAvaElement = props.avatar.map((p) => (
+    <img className={classes.navbarFriendAva} src={p.avatar} />
+  ));
+  let friendsNameElement = props.name.map((p) => (
+    <span className={classes.friendsNames}>{p.name}</span>
+  ));
   return (
     <nav className={classes.nav}>
-      <div className={classes.item}>
-        <NavLink
-          to="/profile"
-          className={(navData) =>
-            navData.isActive ? classes.active : classes.item
-          }
-        >
-          Profile
-        </NavLink>
-      </div>
-      <div className={classes.item}>
-        <NavLink
-          to="/dialogs"
-          className={(navData) =>
-            navData.isActive ? classes.active : classes.item
-          }
-        >
-          Messages
-        </NavLink>
-      </div>
-      <div className={classes.item}>
-        <NavLink
-          to="/news"
-          className={(navData) =>
-            navData.isActive ? classes.active : classes.item
-          }
-        >
-          News
-        </NavLink>
-      </div>
-      <div className={classes.item}>
-        <NavLink
-          to="/music"
-          className={(navData) =>
-            navData.isActive ? classes.active : classes.item
-          }
-        >
-          Music
-        </NavLink>
-      </div>
-      <div className={classes.item}>
-        <NavLink
-          to="/settings"
-          className={(navData) =>
-            navData.isActive ? classes.active : classes.item
-          }
-        >
-          Settings
-        </NavLink>
+      {links.map(({ path, nameOfPage }) => (
+        <div className={classes.item} key={nameOfPage}>
+          <NavLink
+            to={path}
+            className={(navData) =>
+              navData.isActive ? classes.active : classes.item
+            }
+          >
+            {nameOfPage}
+          </NavLink>
+        </div>
+      ))}
+      <div className={classes.popularFriendsSection}>
+        Friends
+        <div className={classes.navbarFriends}>
+          {friendsAvaElement}
+          {friendsNameElement}
+        </div>
       </div>
     </nav>
   );
