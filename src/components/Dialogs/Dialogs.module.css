@@ -11,7 +11,45 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  /* align-items: flex-end; */
+  align-items: flex-end;
   padding: 15px;
   background: rgb(217, 217, 217);
+}
+.newMessageArea {
+  position: relative;
+  width: 100%;
+}
+.newMessage {
+  display: flex;
+  align-self: flex-start;
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 0.7rem;
+  margin-bottom: 10px;
+  resize: none;
+  outline: none;
+  padding: 5px;
+}
+.newMessage:focus {
+  border: 1px solid rgb(3, 91, 223);
+}
+
+.buttonSend {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  padding: 5px 13px;
+  border-radius: 2rem;
+  box-shadow: shadow(low);
+  border: 1px solid rgb(3, 91, 223);
+  background-color: #fff;
+  color: rgb(3, 91, 223);
+  font-size: 14px;
+}
+
+.buttonSend:hover {
+  background-color: rgb(3, 91, 223);
+  color: #fff;
 }

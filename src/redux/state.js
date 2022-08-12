@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 let state = {
     
     profilePage:{
@@ -28,6 +30,16 @@ let state = {
             {name: "Elena",avatar:"https://images.unsplash.com/photo-1568822617270-2c1579f8dfe2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"}
             ]
     }
+  }
+
+  export let addPost = (postMessage) =>{
+    let newPost = {
+        id:5,
+        message: postMessage,
+        likeCount:0
+    };
+    state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state);
   }
 
 export default state;
