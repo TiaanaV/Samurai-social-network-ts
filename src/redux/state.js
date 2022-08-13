@@ -1,6 +1,10 @@
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = () =>{
+  console.log('State was change')
+}
 
 let state = {
+
+
     
     profilePage:{
         posts:[
@@ -8,6 +12,7 @@ let state = {
             { id: 2, message: "Yo!", likeCount: 45 },
             { id: 3, message: "Where are you?", likeCount: 55 },
           ],
+          newPostText:""
     },
     dialogsPage:{
         dialogs:[
@@ -22,6 +27,7 @@ let state = {
             { id: 2, message: "Yo!", writer:"Dima", avatar:"https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"},
             { id: 3, message: "Where are you?", writer:"Me",avatar:"https://images.unsplash.com/photo-1559190394-df5a28aab5c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" },
           ],
+          newMessageText:""
     },
     navBar:{
         popularFriend:[
@@ -32,14 +38,45 @@ let state = {
     }
   }
 
-  export let addPost = (postMessage) =>{
+  window.state=state;
+
+  export const addPost = () =>{
     let newPost = {
         id:5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likeCount:0
     };
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = "";
     rerenderEntireTree(state);
+  }
+
+  export const updateNewPostText= (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+
+  }
+
+  export const addMessage = () =>{
+    let newMessage = {
+        id:4,
+        message: state.dialogsPage.newMessageText,
+        writer:"Me",
+        avatar:"https://images.unsplash.com/photo-1559190394-df5a28aab5c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
+    };
+    state.dialogsPage.messages.push(newMessage);
+    state.dialogsPage.newMessageText = " ";
+    rerenderEntireTree(state);
+  }
+
+  export const updateNewMessageText= (newText) => {
+    state.dialogsPage.newMessageText= newText;
+    rerenderEntireTree(state);
+
+  }
+
+  export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
   }
 
 export default state;
