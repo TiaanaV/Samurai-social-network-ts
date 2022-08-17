@@ -9,7 +9,6 @@ const Navbar = (props) => {
     { path: "/news", nameOfPage: "News" },
     { path: "/music", nameOfPage: "Music" },
     { path: "/settings", nameOfPage: "Settings" },
-    { path: "/friends", nameOfPage: "Friends" },
   ];
   let friendsAvaElement = props.avatar.map((p) => (
     <img className={classes.navbarFriendAva} src={p.avatar} />
@@ -17,6 +16,7 @@ const Navbar = (props) => {
   let friendsNameElement = props.name.map((p) => (
     <span className={classes.friendsNames}>{p.name}</span>
   ));
+
   return (
     <nav className={classes.nav}>
       {links.map(({ path, nameOfPage }) => (
@@ -32,7 +32,14 @@ const Navbar = (props) => {
         </div>
       ))}
       <div className={classes.popularFriendsSection}>
-        Friends
+        <NavLink
+          to="/friends"
+          className={(navData) =>
+            navData.isActive ? classes.active : classes.popularFriendsSection
+          }
+        >
+          Friends
+        </NavLink>
         <div className={classes.navbarFriends}>
           {friendsAvaElement}
           {friendsNameElement}
