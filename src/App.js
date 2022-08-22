@@ -1,21 +1,20 @@
 import Header from "./components/Header/Header";
-import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import classes from "./App.module.css";
-import Dialogs from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import Friends from "./components/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
 
 const App = (props) => {
   return (
     <BrowserRouter>
       <div className={classes.appWrapper}>
         <Header />
-        <Navbar avatar={props.state.navBar.popularFriend} name={props.state.navBar.popularFriend}
+        <NavbarContainer
         />
         <div className={classes.appWrapperContent}>
           <Routes>
