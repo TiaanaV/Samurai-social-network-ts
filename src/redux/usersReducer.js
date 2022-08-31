@@ -10,6 +10,9 @@ let initialState = {
     //     { id: 4,followed: false, name: "Kate", avatar:"https://images.unsplash.com/photo-1581467655410-0c2bf55d9d6c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80",status: 'Trip', location:{city: "Minsk", country:"Belarus",}},
     //     { id: 5,followed: false, name: "Sergey", avatar:"https://images.unsplash.com/photo-1537815749002-de6a533c64db?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=932&q=80",status: 'Boss is here', location:{city: "Sochi", country:"Russia",} },
       ],
+    pageSize: 5,
+    totalUsersCount:0,
+    currentPage: 1,
 }
 const usersReducer = (state = initialState,action) => {
     switch(action.type){
