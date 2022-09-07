@@ -1,7 +1,11 @@
-.header{
-    grid-area: h;
-  }
-  
-.logo{
-    width: 70px;
-  }
+.header {
+  grid-area: h;
+}
+
+.logo {
+  width: 70px;
+}
+
+.loginBlock {
+  float: right;
+}
