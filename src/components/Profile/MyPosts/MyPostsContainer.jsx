@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { compose } from "redux";
 import {
   addPostActionCreator,
   updateNewPostTextActionCreator,
@@ -23,6 +24,8 @@ let mapDispatchToProps = (dispatch) => {
   };
 };
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+const MyPostsContainer = compose(connect(mapStateToProps, mapDispatchToProps))(
+  MyPosts
+);
 
 export default MyPostsContainer;
