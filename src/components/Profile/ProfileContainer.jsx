@@ -8,7 +8,10 @@ import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let userId = this.props.router.params.userId;
+    let userId = this.props.match.params.userId;
+    if (!userId) {
+      userId = 25786;
+    }
     this.props.getProfileInfo(userId);
   }
 
@@ -26,7 +29,7 @@ function withRouter(Component) {
     let location = useLocation();
     let navigate = useNavigate();
     let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
+    return <Component {...props} match={{ location, navigate, params }} />;
   }
 
   return ComponentWithRouterProp;
@@ -34,6 +37,6 @@ function withRouter(Component) {
 
 export default compose(
   connect(mapStateToProps, { getProfileInfo }),
-  withRouter,
-  withAuthRedirect
+  withRouter
+  // withAuthRedirect
 )(ProfileContainer);
