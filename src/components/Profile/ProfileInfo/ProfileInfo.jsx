@@ -8,7 +8,6 @@ const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />;
   }
-  debugger;
   return (
     <div>
       <div className={classes.descriptionBlock}>
@@ -29,7 +28,7 @@ const ProfileInfo = (props) => {
             ? props.profile.lookingForAJobDescription
             : " "}
         </div>
-        <ProfileStatus status={"Hello my friends"} />
+        <ProfileStatus status={props.status} />
       </div>
     </div>
   );
