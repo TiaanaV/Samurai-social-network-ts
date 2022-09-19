@@ -63,15 +63,16 @@ const profileReducer = (state = initialState,action) => {
     }
 
     export const getStatus = (userId) => (dispatch) =>{
-        debugger
-            profileAPI.getStatus(userId).then((data) => {
-            dispatch(setStatus(data));
+            profileAPI.getStatus(userId)
+            .then((response) => {
+            dispatch(setStatus(response.data));
             });
         }
-        export const updateStatus = (status) => (dispatch) =>{
-            profileAPI.updateStatus(status).then((data) => {
-                if(data.resultCode === 0){
-                    dispatch(setStatus(data));
+    export const updateStatus = (status) => (dispatch) =>{
+            profileAPI.updateStatus(status)
+            .then((response) => {
+                if(response.data.resultCode === 0){
+                    dispatch(setStatus(status));
                 }
             });
         }
