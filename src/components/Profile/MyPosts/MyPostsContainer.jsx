@@ -4,7 +4,7 @@ import {
   addPostActionCreator,
   updateNewPostTextActionCreator,
 } from "../../../redux/profileReducer";
-import MyPosts from "./MyPosts";
+import { MyPostsReduxForm } from "./MyPosts";
 
 let mapStateToProps = (state) => {
   return {
@@ -25,7 +25,7 @@ let mapDispatchToProps = (dispatch) => {
 };
 
 const MyPostsContainer = compose(connect(mapStateToProps, mapDispatchToProps))(
-  MyPosts
+  MyPostsReduxForm
 );
 
 export default MyPostsContainer;

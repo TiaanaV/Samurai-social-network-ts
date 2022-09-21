@@ -13,8 +13,8 @@ let initialState = {
         { id: 1, message: "Hi!", writer:"Me", avatar:"https://images.unsplash.com/photo-1559190394-df5a28aab5c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" },
         { id: 2, message: "Yo!", writer:"Dima", avatar:"https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"},
         { id: 3, message: "Where are you?", writer:"Me",avatar:"https://images.unsplash.com/photo-1559190394-df5a28aab5c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" },
-      ],
-      newMessageText:""
+      ]
+     
 }
 const dialogsReducer = (state = initialState,action) => {
     switch(action.type){
@@ -28,7 +28,7 @@ const dialogsReducer = (state = initialState,action) => {
             return{
                 ...state,
                 messages:[...state.messages,newMessage],
-                newMessageText:"",
+                newMessageBody:action.newMessageBody,
             };
         case UPDATE_NEW_MESSAGE_TEXT:
             return{
@@ -40,7 +40,7 @@ const dialogsReducer = (state = initialState,action) => {
             }
 }
 
-export const sendMessageActionCreator =() => ({type: SEND_MESSAGE});
+export const sendMessageActionCreator =(newMessageBody) => ({type: SEND_MESSAGE, newMessageBody});
 export const updateNewMessageTextActionCreator=(text) =>( {type:UPDATE_NEW_MESSAGE_TEXT, newText: text })
 
 export default dialogsReducer;

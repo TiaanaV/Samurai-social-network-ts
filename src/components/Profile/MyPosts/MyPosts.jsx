@@ -1,6 +1,8 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import { Field } from "redux-form";
+import { reduxForm } from "redux-form";
 
 const MyPosts = (props) => {
   let postsElement = props.posts.map((p) => (
@@ -21,7 +23,10 @@ const MyPosts = (props) => {
     <div className={classes.postsBlock}>
       <h3 className={classes.headline}>My posts</h3>
       <div>
-        <textarea
+        <Field
+          type={"text"}
+          component={"input"}
+          name={"post"}
           onChange={onPostChange}
           ref={newPostElement}
           className={classes.newPostArea}
@@ -41,3 +46,5 @@ const MyPosts = (props) => {
 };
 
 export default MyPosts;
+
+export const MyPostsReduxForm = reduxForm({ form: "myPosts" })(MyPosts);
