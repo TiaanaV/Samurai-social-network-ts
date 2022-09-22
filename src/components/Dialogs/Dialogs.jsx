@@ -23,10 +23,6 @@ const Dialogs = (props) => {
     />
   ));
 
-  let onSendMessageClick = () => {
-    props.sendMessage();
-  };
-
   const addNewMessage = (values) => {
     props.sendMessage(values.newMessageBody);
   };

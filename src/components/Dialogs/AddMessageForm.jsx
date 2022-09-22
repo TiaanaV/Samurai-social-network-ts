@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./Dialogs.module.css";
-
 import { Field } from "redux-form";
 
 const AddMessageForm = (props) => {
