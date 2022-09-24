@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import { login } from "../redux/authReducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -25,7 +26,7 @@ export const usersAPI = {
 
     follow(id){
         return instance.post(`follow/${id}`)
-          .then(response => {
+          .then(response => { 
             return response.data;
           });
     },
@@ -36,6 +37,12 @@ export const authAPI = {
         return instance.get(`auth/me`).then(response => {
         return response.data;
       })
+    },
+    login(email,password,rememberMe= false){
+      return instance.post(`auth/login`,{email,password,rememberMe})
+    },
+    logout(){
+      return instance.delete(`auth/login`)
     }
 }
 

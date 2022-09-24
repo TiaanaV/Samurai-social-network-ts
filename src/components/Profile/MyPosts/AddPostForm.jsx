@@ -5,7 +5,7 @@ import {
   required,
   maxLengthCreator,
 } from "../../../utils/validators/validator";
-import { Textarea } from "../../common/FormsControl/FormsControl";
+import { Forms } from "../../common/FormsControl/FormsControl";
 
 const maxLength10 = maxLengthCreator(10);
 
@@ -14,7 +14,8 @@ const AddPostForm = (props) => {
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field
-          component={Textarea}
+          component={Forms}
+          typeField="textarea"
           name={"newPostText"}
           className={classes.newPostArea}
           placeholder={"Post message..."}

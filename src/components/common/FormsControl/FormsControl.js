@@ -13,12 +13,7 @@ const FormsControl = ({input,meta,child,...props}) => {
     )
 }
 
-export const Textarea = (props) => {
+export const Forms = (props) => {
     const {input,meta,children, ...restProps} = props;
-    return <FormsControl {...props}><textarea {...input} {...restProps}/></FormsControl> 
-}
-
-export const Input = (props) => {
-    const {input,meta,children, ...restProps} = props;
-    return <FormsControl {...props}><input {...input} {...restProps}/></FormsControl> 
+    return <FormsControl {...props}><props.typeField {...input} {...restProps}/></FormsControl> 
 }
