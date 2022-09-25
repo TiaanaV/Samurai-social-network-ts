@@ -6,3 +6,9 @@
 .formControl.error span {
   color: rgb(59, 36, 229);
 }
+
+.formSummaryError {
+  border: solid rgb(169, 36, 36) 1px;
+  padding: 5px;
+  color: red;
+}
