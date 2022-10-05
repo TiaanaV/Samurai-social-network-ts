@@ -4,7 +4,9 @@ import Post from "./Post/Post";
 import { reduxForm } from "redux-form";
 import AddPostForm from "./AddPostForm";
 
-const MyPosts = (props) => {
+const AddPostFormRedux = reduxForm({ form: "my post" })(AddPostForm);
+
+const MyPosts = React.memo((props) => {
   let postsElement = props.posts.map((p) => (
     <Post message={p.message} likeCount={p.likeCount} />
   ));
@@ -12,7 +14,6 @@ const MyPosts = (props) => {
   const addNewPost = (value) => {
     props.addPost(value.newPostText);
   };
-
   return (
     <div className={classes.postsBlock}>
       <h3 className={classes.headline}>My posts</h3>
@@ -20,8 +21,6 @@ const MyPosts = (props) => {
       <div className={classes.posts}>{postsElement}</div>
     </div>
   );
-};
+});
 
 export default MyPosts;
-
-const AddPostFormRedux = reduxForm({ form: "my post" })(AddPostForm);
