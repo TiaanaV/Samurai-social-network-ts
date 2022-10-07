@@ -30,7 +30,7 @@ it('after deleting length of posts should be decrement', () => {
     expect(newState.posts.length).toBe(2);
 })
 
-it(`after deleting length of posts shouldn't be decrement if id is incorrect`, () => {
+it(`after deleting length of posts shouldn't be decrement if id is`, () => {
     let action = deletePost(1000);
     let newState = profileReducer(state,action);
 
