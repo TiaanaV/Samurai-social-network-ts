@@ -27,7 +27,6 @@ class App extends React.Component{
        return <Preloader/>
       }
        return (
-        <BrowserRouter>
           <div className={classes.appWrapper}>
             <HeaderContainer/>
             <NavbarContainer
@@ -46,7 +45,6 @@ class App extends React.Component{
               </Routes>
             </div>
           </div>
-        </BrowserRouter>
       );
   };
 }
