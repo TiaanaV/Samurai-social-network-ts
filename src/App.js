@@ -11,11 +11,12 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/LoginPage";
 import React from "react";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import {  useParams } from "react-router-dom";
 import { compose } from "redux";
 import { initializeApp } from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import store from "./redux/redux-store";
 
 class App extends React.Component{
   componentDidMount() {
@@ -28,7 +29,7 @@ class App extends React.Component{
       }
        return (
           <div className={classes.appWrapper}>
-            <HeaderContainer/>
+           <HeaderContainer/>
             <NavbarContainer
             />
             <div className={classes.appWrapperContent}>
@@ -65,4 +66,13 @@ let WithUrlDataContainerComponent = withRouter(App);
 const mapStateToProps = (state) => ({
   initialized:state.app.initialized,
 })
-  export default  compose(connect(mapStateToProps, {initializeApp})(WithUrlDataContainerComponent));
+  const AppContainer =  compose(connect(mapStateToProps, {initializeApp})(WithUrlDataContainerComponent));
+ const MainApp = (props) => {
+    return <BrowserRouter>
+    <Provider store={store}>
+      <AppContainer />
+    </Provider>
+  </BrowserRouter>
+  }
+
+  export default MainApp;
