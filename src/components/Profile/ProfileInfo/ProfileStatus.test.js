@@ -1,5 +1,5 @@
 
-import TestRenderer from 'react-test-renderer'; 
+import { create } from "react-test-renderer";
 import React from "react";
 import ProfileStatus from "./ProfileStatus";
 
@@ -11,7 +11,7 @@ describe("ProfileStatus component", () => {
 //     expect(statusInSpan).toBe(testStatusStr)
 // })
  test("Status from props should be in the state ", () => {
-  const component = TestRenderer.create(<ProfileStatus status = "it-kamasutra.com"/>)
+  const component = create(<ProfileStatus status = "it-kamasutra.com"/>)
   const instance = component.getInstance();
   expect(instance.state.status).toBe("it-kamasutra.com");
  });

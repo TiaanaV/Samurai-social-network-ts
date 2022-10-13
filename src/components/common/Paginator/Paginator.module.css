@@ -1,0 +1,36 @@
+.pagination {
+  margin: 15px;
+}
+
+.pageNumbers {
+  padding: 5px;
+  border: 1px solid rgb(2, 9, 16);
+}
+
+.selectedPage {
+  padding: 10px;
+  font-weight: 800;
+}
+
+.button {
+  margin: 10px;
+  box-sizing: border-box;
+  font-family: inherit;
+  padding: 8px 10px;
+  border-radius: 2rem;
+  box-shadow: shadow(low);
+  border: 1px solid rgb(3, 91, 223);
+  background-color: #fff;
+  color: rgb(3, 91, 223);
+  font-size: 14px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.button:hover {
+  background-color: rgb(3, 91, 223);
+  color: #fff;
+}

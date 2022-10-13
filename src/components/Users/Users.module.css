@@ -3,12 +3,3 @@
   width: 70px;
   height: 70px;
 }
-
-.pagination {
-  margin: 15px;
-}
-
-.selectedPage {
-  padding: 10px;
-  font-weight: 800;
-}
