@@ -14,11 +14,11 @@ import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
 import React, {Suspense, lazy} from "react";
 
-const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
-const ProfileContainer = lazy(() => import("./components/Profile/ProfileContainer"));
-const News = lazy(() => import("./components/News/News"));
-const Music  = lazy(() => import("./components/Music/Music"));
-const Settings = lazy(() => import("./components/Settings/Settings"));
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer =  React.lazy(() => import("./components/Profile/ProfileContainer"));
+const News =  React.lazy(() => import("./components/News/News"));
+const Music  =  React.lazy(() => import("./components/Music/Music"));
+const Settings =  React.lazy(() => import("./components/Settings/Settings"));
 
 class App extends React.Component{
   componentDidMount() {
@@ -72,11 +72,11 @@ const mapStateToProps = (state) => ({
 })
   const AppContainer =  compose(connect(mapStateToProps, {initializeApp})(WithUrlDataContainerComponent));
  const MainApp = (props) => {
-    return <BrowserRouter>
+    return <HashRouter>
     <Provider store={store}>
       <AppContainer />
     </Provider>
-  </BrowserRouter>
+  </HashRouter>
   }
 
   export default MainApp;

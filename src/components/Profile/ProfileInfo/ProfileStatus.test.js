@@ -16,11 +16,18 @@ describe("ProfileStatus component", () => {
   expect(instance.state.status).toBe("it-kamasutra.com");
  });
 
- test("After creation <span> should be displayed with correct status ", () => {
-  const component = create(<ProfileStatus status = "it-kamasutra.com"/>)
-  const root = component.root;
-  let span = root.findByType('span');
-  expect(span.length).toBe(1);
- })
+//  test("After creation <span> should be displayed with correct status ", () => {
+//   const component = create(<ProfileStatus status = "it-kamasutra.com"/>)
+//   const root = component.root;
+//   let span = root.findByType('span');
+//   expect(span.length).toBe (1);
+//  });
 
-})
+//  test("After creation <span> should be displayed with correct status ", () => {
+//     const component = create(<ProfileStatus status = "it-kamasutra.com"/>)
+//     const root = component.root;
+//     let span = root.findByType('span');
+//     expect(span.length).toBe(1);
+//    })
+
+ })
