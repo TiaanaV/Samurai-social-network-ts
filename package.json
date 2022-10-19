@@ -2,7 +2,7 @@
   "name": "first-project-on-reack",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tiaanav.github.io/First-project-on-react/",
+  "homepage": "https://tiaanav.github.io/First-project-on-react",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.4",
@@ -47,7 +47,7 @@
     ]
   },
   "devDependencies": {
-    "react-test-renderer": "^18.2.0",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "react-test-renderer": "^18.2.0"
   }
 }

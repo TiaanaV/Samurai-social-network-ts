@@ -1,6 +1,6 @@
 
 import classes from "./App.module.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {HashRouter, Route, Routes } from "react-router-dom";
 import Friends from "./components/Friends/Friends";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
