@@ -8,15 +8,24 @@ const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />;
   }
+
+  const onAvatarPhotoSelected = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0]);
+    }
+  };
   return (
     <div>
       <div className={classes.descriptionBlock}>
         <img
           className={classes.avatar}
-          src={
-            props.profile.photos.large ? props.profile.photos.large : userPhoto
-          }
+          src={props.profile.photos.large || userPhoto}
         />
+        {props.isOwner && (
+          <form>
+            <input type={"file"} onChange={onAvatarPhotoSelected} />
+          </form>
+        )}
         <div>Name: {props.profile.fullName}</div>
         <div>About me: {props.profile.aboutMe}</div>
         <div>
