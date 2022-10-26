@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Preloader from "../../common/Preloader/Preloader";
 import classes from "./ProfileInfo.module.css";
 import userPhoto from "../../../assets/images/user-icon.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileInfoData from "./ProfileInfoData";
+import ProfileInfoDataForm from "./ProfileInfoDataForm";
 
 const ProfileInfo = (props) => {
+  const [editMode, setEditMode] = useState(false);
+
   if (!props.profile) {
     return <Preloader />;
   }
@@ -26,17 +30,18 @@ const ProfileInfo = (props) => {
             <input type={"file"} onChange={onAvatarPhotoSelected} />
           </form>
         )}
-        <div>Name: {props.profile.fullName}</div>
-        <div>About me: {props.profile.aboutMe}</div>
-        <div>
-          Looking for a job: {props.profile.lookingForAJob ? "Yes" : "No"}
-        </div>
-        <div>
-          Description:
-          {props.profile.lookingForAJob
-            ? props.profile.lookingForAJobDescription
-            : " "}
-        </div>
+        {editMode ? (
+          <ProfileInfoDataForm profile={props.profile} />
+        ) : (
+          <ProfileInfoData
+            goToEditMode={() => {
+              setEditMode(true);
+            }}
+            profile={props.profile}
+            isOwner={props.isOwner}
+          />
+        )}
+
         <ProfileStatusWithHooks
           status={props.status}
           updateStatus={props.updateStatus}
