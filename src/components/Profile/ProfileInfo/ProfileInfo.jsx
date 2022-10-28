@@ -8,6 +8,7 @@ import ProfileInfoDataForm from "./ProfileInfoDataForm";
 
 const ProfileInfo = (props) => {
   const [editMode, setEditMode] = useState(false);
+  debugger;
 
   if (!props.profile) {
     return <Preloader />;
@@ -18,6 +19,12 @@ const ProfileInfo = (props) => {
       props.savePhoto(e.target.files[0]);
     }
   };
+
+  const onSubmit = (formDate) => {
+    props.saveProfile(formDate);
+    setEditMode(false);
+  };
+
   return (
     <div>
       <div className={classes.descriptionBlock}>
@@ -31,7 +38,11 @@ const ProfileInfo = (props) => {
           </form>
         )}
         {editMode ? (
-          <ProfileInfoDataForm profile={props.profile} />
+          <ProfileInfoDataForm
+            initialValues={props.profile}
+            profile={props.profile}
+            onSubmit={onSubmit}
+          />
         ) : (
           <ProfileInfoData
             goToEditMode={() => {

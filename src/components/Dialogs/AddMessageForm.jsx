@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Dialogs.module.css";
 import { Field } from "redux-form";
-import { Forms } from "../common/FormsControl/FormsControl";
+import { Forms, Textarea } from "../common/FormsControl/FormsControl";
 import { maxLengthCreator, required } from "../../utils/validators/validator";
 
 const AddMessageForm = (props) => {
@@ -13,7 +13,7 @@ const AddMessageForm = (props) => {
         <Field
           className={classes.newMessage}
           typeField="textarea"
-          component={Forms}
+          component={Textarea}
           validate={[required, maxLength50]}
           name={"newMessageBody"}
           placeholder={"Enter your message..."}
