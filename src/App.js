@@ -12,7 +12,7 @@ import { compose } from "redux";
 import { initializeApp } from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
-import React, {Suspense, lazy} from "react";
+import React, {Suspense} from "react";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer =  React.lazy(() => import("./components/Profile/ProfileContainer"));
@@ -71,11 +71,12 @@ const mapStateToProps = (state) => ({
   initialized:state.app.initialized,
 })
   const AppContainer =  compose(connect(mapStateToProps, {initializeApp})(WithUrlDataContainerComponent));
+  
  const MainApp = (props) => {
-    return <HashRouter>
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>
+  return <HashRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
   </HashRouter>
   }
 

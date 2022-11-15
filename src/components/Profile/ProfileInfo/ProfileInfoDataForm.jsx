@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "./ProfileInfo.module.css";
 import { reduxForm } from "redux-form";
 import {
   createField,
@@ -24,20 +25,25 @@ const ProfileInfoDataForm = (props) => {
         </div>
         <div>
           <b>My professional skills:</b>
-          {createField("My professional skills", "mySkills", [], Textarea)}
+          {createField(
+            "My professional skills",
+            "lookingForAJobDescription",
+            [],
+            Textarea
+          )}
         </div>
 
-        {/* <div>
+        <div>
           <b>Contacts:</b>
           {Object.keys(props.profile.contacts).map((key) => {
             return (
-              <Contacts
-                contactTitle={key}
-                contactValue={props.profile.contacts[key]}
-              />
+              <div className={classes.contacts}>
+                <b>{key}:</b>
+                {createField(key, "contacts." + key, [], Input)}
+              </div>
             );
           })}
-        </div> */}
+        </div>
       </div>
     </form>
   );

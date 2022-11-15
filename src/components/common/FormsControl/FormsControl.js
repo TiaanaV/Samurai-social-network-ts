@@ -26,7 +26,7 @@ export const createField = (placeholder,name,validators,component,props = {},tex
         <Field
           placeholder={placeholder}
           name={name}
-          validate={validators}
+          validators={validators}
           component={component}
           {...props}
         />

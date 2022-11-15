@@ -1,6 +1,5 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-// import { Forms } from "../common/FormsControl/FormsControl";
 import { required } from "../../utils/validators/validator";
 import { Input, Textarea } from "../common/FormsControl/FormsControl";
 import classes from "./../common/FormsControl/FormsControls.module.css";

@@ -8,7 +8,6 @@ import ProfileInfoDataForm from "./ProfileInfoDataForm";
 
 const ProfileInfo = (props) => {
   const [editMode, setEditMode] = useState(false);
-  debugger;
 
   if (!props.profile) {
     return <Preloader />;
