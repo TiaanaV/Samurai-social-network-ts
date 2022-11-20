@@ -32,6 +32,7 @@ const ProfileInfoData = (props) => {
         {Object.keys(props.profile.contacts).map((key) => {
           return (
             <Contacts
+              key={key}
               contactTitle={key}
               contactValue={props.profile.contacts[key]}
             />

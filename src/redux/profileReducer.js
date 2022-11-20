@@ -1,4 +1,6 @@
+import { stopSubmit } from "redux-form";
 import { profileAPI } from "../api/api";
+
 
 const ADD_POST='ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -82,12 +84,15 @@ const profileReducer = (state = initialState,action) => {
                 }
          }
 
- export const saveProfile = (profile) => async(dispatch,getState) =>{
+ export const saveProfile = (profile) => async(dispatch) =>{
         const userId = 25786;
         let response = await profileAPI.saveProfile(profile);
 
                 if(response.data.resultCode === 0){
                    dispatch(getProfileInfo(userId))
+                } else {
+                    dispatch(stopSubmit("profile-edit",{'contacts':{'facebook':response.data.messages[0]}}))
+                    return Promise.reject(response.data.messages[0])
                 }
          }
          

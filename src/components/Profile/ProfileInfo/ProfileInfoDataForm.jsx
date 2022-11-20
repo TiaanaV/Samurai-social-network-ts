@@ -6,12 +6,16 @@ import {
   Input,
   Textarea,
 } from "../../common/FormsControl/FormsControl";
+import style from "./../../common/FormsControl/FormsControls.module.css";
 
 const ProfileInfoDataForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         <button>Save</button>
+        {props.error && (
+          <div className={style.formSummaryError}>{props.error}</div>
+        )}
         <div>
           <b>Name:</b> {createField("Full name", "fullName", [], Input)}
         </div>
@@ -37,7 +41,7 @@ const ProfileInfoDataForm = (props) => {
           <b>Contacts:</b>
           {Object.keys(props.profile.contacts).map((key) => {
             return (
-              <div className={classes.contacts}>
+              <div key={key} className={classes.contacts}>
                 <b>{key}:</b>
                 {createField(key, "contacts." + key, [], Input)}
               </div>
@@ -49,8 +53,11 @@ const ProfileInfoDataForm = (props) => {
   );
 };
 
-const ProfileReduxForm = reduxForm({ form: "profile-edit" })(
-  ProfileInfoDataForm
-);
+const ProfileReduxForm = reduxForm({
+  form: "profile-edit",
+  enableReinitialize: true,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+})(ProfileInfoDataForm);
 
 export default ProfileReduxForm;

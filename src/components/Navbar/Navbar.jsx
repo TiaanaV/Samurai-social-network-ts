@@ -4,10 +4,12 @@ import classes from "./Navbar.module.css";
 
 const Navbar = (props) => {
   let friendsAvaElement = props.popularFriend.map((p) => (
-    <img className={classes.navbarFriendAva} src={p.avatar} />
+    <img key={p.id} className={classes.navbarFriendAva} src={p.avatar} />
   ));
   let friendsNameElement = props.popularFriend.map((p) => (
-    <span className={classes.friendsNames}>{p.name}</span>
+    <span key={p.id} className={classes.friendsNames}>
+      {p.name}
+    </span>
   ));
 
   return (
