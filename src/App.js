@@ -1,6 +1,6 @@
 
 import classes from "./App.module.css";
-import {HashRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Route, Routes } from "react-router-dom";
 import Friends from "./components/Friends/Friends";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -73,11 +73,11 @@ const mapStateToProps = (state) => ({
   const AppContainer =  compose(connect(mapStateToProps, {initializeApp})(WithUrlDataContainerComponent));
   
  const MainApp = (props) => {
-  return <HashRouter>
+  return <BrowserRouter>
       <Provider store={store}>
         <AppContainer />
       </Provider>
-  </HashRouter>
+  </BrowserRouter>
   }
 
   export default MainApp;

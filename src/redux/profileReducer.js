@@ -91,10 +91,19 @@ const profileReducer = (state = initialState,action) => {
                 if(response.data.resultCode === 0){
                    dispatch(getProfileInfo(userId))
                 } else {
-                    dispatch(stopSubmit("profile-edit",{'contacts':{'facebook':response.data.messages[0]}}))
+                    let errorType = response.data.messages[0];
+
+                    if(errorType.includes(".")){
+                        errorType = errorType.split(".",1);
+                     } else if ( errorType.includes("Contacts->")){
+                        errorType = errorType.split('(Contacts->').join(": ").split(')',1);
+                    }
+
+                    dispatch(stopSubmit("profile-edit",{_error: errorType}))
                     return Promise.reject(response.data.messages[0])
                 }
-         }
+            }
+        
          
     
 
