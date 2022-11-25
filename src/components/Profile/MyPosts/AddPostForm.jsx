@@ -15,7 +15,7 @@ const AddPostForm = (props) => {
       <div>
         <Field
           component={Textarea}
-          typeField="textarea"
+          typefield="textarea"
           name={"newPostText"}
           className={classes.newPostArea}
           placeholder={"Post message..."}

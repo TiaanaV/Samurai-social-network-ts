@@ -21,7 +21,7 @@ const LoginForm = (props) => {
           placeholder={"Password"}
           type={"password"}
           component={Input}
-          typeField="input"
+          typefield="input"
           name={"password"}
           validate={[required]}
         />
@@ -30,7 +30,7 @@ const LoginForm = (props) => {
         <Field
           type={"checkbox"}
           component={Input}
-          typeField="checkbox"
+          typefield="checkbox"
           name={"rememberMe"}
         />
         remember me
@@ -42,7 +42,7 @@ const LoginForm = (props) => {
       {props.captchaUrl ? (
         <Field
           component={Input}
-          typeField="input"
+          typefield="input"
           name={"captcha"}
           validate={[required]}
         />

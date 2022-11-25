@@ -12,7 +12,7 @@ const AddMessageForm = (props) => {
       <div className={classes.newMessageArea}>
         <Field
           className={classes.newMessage}
-          typeField="textarea"
+          typefield="textarea"
           component={Textarea}
           validate={[required, maxLength50]}
           name={"newMessageBody"}

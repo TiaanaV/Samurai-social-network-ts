@@ -72,10 +72,14 @@ const profileReducer = (state = initialState,action) => {
             dispatch(setStatus(response.data));
         }
     export const updateStatus = (status) => async(dispatch) =>{
-        let response = await profileAPI.updateStatus(status)
-                if(response.data.resultCode === 0){
-                    dispatch(setStatus(status));
-                }
+        try{
+            let response = await profileAPI.updateStatus(status)
+                 if(response.data.resultCode === 0){
+                        dispatch(setStatus(status));
+                    }
+         } catch(error) {
+            /// alert about error - dispatch(action) with code of http error (SAGA)
+         }
         }
     export const savePhoto = (file) => async(dispatch) =>{
          let response = await profileAPI.savePhoto(file)

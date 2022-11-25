@@ -1,6 +1,6 @@
 
 import classes from "./App.module.css";
-import {BrowserRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Friends from "./components/Friends/Friends";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -13,6 +13,7 @@ import { initializeApp } from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
 import React, {Suspense} from "react";
+import NotFound from "./components/common/NotFound";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer =  React.lazy(() => import("./components/Profile/ProfileContainer"));
@@ -21,10 +22,17 @@ const Music  =  React.lazy(() => import("./components/Music/Music"));
 const Settings =  React.lazy(() => import("./components/Settings/Settings"));
 
 class App extends React.Component{
+  catchAllUnhandledErrors = (reason,promiseRejectionEvent) => {
+  //   globalError
+  //  console.error(promiseRejectionEvent)
+  }
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener("emekkemcekkek",this.catchAllUnhandledErrors)
   }
-
+   componentWillUnmount(){
+    window.removeEventListener("emekkemcekkek",this.catchAllUnhandledErrors)
+   }
     render(){
       if(!this.props.initialized){
        return <Preloader/>
@@ -37,6 +45,7 @@ class App extends React.Component{
             <div className={classes.appWrapperContent}>
             <Suspense fallback={<Preloader />}>
               <Routes>
+                <Route path="/" element={<Navigate to="/profile" />} />
                 <Route path="/profile/:userId" element={<ProfileContainer/>}/>
                 <Route path="/profile/*" element={<ProfileContainer/>}/>
                 <Route path="/dialogs/*" element={<DialogsContainer/>} />
@@ -46,6 +55,7 @@ class App extends React.Component{
                 <Route path="/users" element={<UsersContainer/>} />
                 <Route path="/friends" element={<Friends/>} />
                 <Route path="/login" element={<LoginPage/>} />
+                <Route path="*" element={<NotFound/>} />
               </Routes>
               </Suspense>
             </div>
@@ -74,10 +84,10 @@ const mapStateToProps = (state) => ({
   
  const MainApp = (props) => {
   return <BrowserRouter>
-      <Provider store={store}>
-        <AppContainer />
-      </Provider>
-  </BrowserRouter>
+            <Provider store={store}>
+              <AppContainer />
+            </Provider>
+         </BrowserRouter>
   }
 
   export default MainApp;
