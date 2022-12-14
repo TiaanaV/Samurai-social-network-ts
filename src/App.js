@@ -2,6 +2,7 @@
 import classes from "./App.module.css";
 import {BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Friends from "./components/Friends/Friends";
+import Error from "./components/common/Error";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -22,16 +23,21 @@ const Music  =  React.lazy(() => import("./components/Music/Music"));
 const Settings =  React.lazy(() => import("./components/Settings/Settings"));
 
 class App extends React.Component{
+
   catchAllUnhandledErrors = (reason,promiseRejectionEvent) => {
-  //   globalError
-  //  console.error(promiseRejectionEvent)
+     alert(reason,promiseRejectionEvent)
+    // если в AppReducer globalError есть (строка с типом ошибки или где ошибка), то показать компоненту Ошибки с текстом и распарсить строку как в profileReduser в thunk saveProfile
+    // console.log(this.props.checkGlobalError(reason,promiseRejectionEvent))
+
+    // .then(
+    //   globalError===null ? null : <Error errorTypeText={this.props.errorTypeText}/>)
   }
   componentDidMount() {
     this.props.initializeApp();
-    window.addEventListener("emekkemcekkek",this.catchAllUnhandledErrors)
+    window.addEventListener("unhandlerejection",this.catchAllUnhandledErrors)
   }
    componentWillUnmount(){
-    window.removeEventListener("emekkemcekkek",this.catchAllUnhandledErrors)
+    window.removeEventListener("unhandlerejection",this.catchAllUnhandledErrors)
    }
     render(){
       if(!this.props.initialized){

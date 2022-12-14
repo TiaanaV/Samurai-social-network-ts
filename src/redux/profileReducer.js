@@ -7,6 +7,8 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST'
 const SAVE_PHOTO_SUCCESS ='SAVE_PHOTO_SUCCESS';
+const HAS_ERROR = 'profile/HAS_ERROR';
+const CLEAN_ERROR = 'profile/CLEAN_ERROR ';
 
 let initialState = {
     posts:[
@@ -16,6 +18,8 @@ let initialState = {
       ],
       profile: null,
       status:"",
+      error:null,
+
 }
 
 const profileReducer = (state = initialState,action) => {
@@ -47,16 +51,30 @@ const profileReducer = (state = initialState,action) => {
             return {...state, profile:{...state.profile,photos:action.photos},
             } 
         }
+        case HAS_ERROR:{
+            return{
+                ...state,
+                ...action.payload
+            }
+        }
+        case CLEAN_ERROR:{
+            return{
+                ...state,
+                ...action.payload = null
+            } 
+        }
 
         default:
             return state;
-        }
+        } 
     }
     export const addPostActionCreator = (newPostText) => ({ type: ADD_POST,newPostText });
     export const deletePost = (postId) => ({ type: DELETE_POST, postId});
     export const setStatus = (status) => ({ type: SET_STATUS, status });
      const setUserProfile = (profile) => ({type:SET_USER_PROFILE,profile});
      const savePhotoSuccess =(photos) => ({type:SAVE_PHOTO_SUCCESS,photos});
+     const hasError = (error) => ({type:HAS_ERROR,payload:{error}});
+    //  const cleanError = (error) => ({type:CLEAN_ERROR,payload:{error}}); 
 
 
     export const getProfileInfo = (userId) => {
@@ -77,10 +95,17 @@ const profileReducer = (state = initialState,action) => {
                  if(response.data.resultCode === 0){
                         dispatch(setStatus(status));
                     }
-         } catch(error) {
-            /// alert about error - dispatch(action) with code of http error (SAGA)
-         }
+         } 
+         catch(error) {
+            let errorMessage =error.message;
+            if(/\d/g.test(errorMessage)){
+                errorMessage="There was some unexpected error. We are already trying to fix it."
+            }
+            dispatch(hasError(errorMessage))
+            setTimeout(() => dispatch(hasError(null)),2000)
+            }
         }
+        
     export const savePhoto = (file) => async(dispatch) =>{
          let response = await profileAPI.savePhoto(file)
                 if(response.data.resultCode === 0){

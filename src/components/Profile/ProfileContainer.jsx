@@ -7,6 +7,7 @@ import {
   saveProfile,
   updateStatus,
 } from "../../redux/profileReducer";
+import Error from "./../common/Error";
 import { connect } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
@@ -25,7 +26,8 @@ class ProfileContainer extends React.Component {
       //25786;
     }
     this.props.getProfileInfo(userId);
-    this.props.getStatus(userId);
+
+    // this.props.getStatus(userId);
   }
 
   componentDidMount() {
@@ -36,18 +38,26 @@ class ProfileContainer extends React.Component {
     if (this.props.match.params.userId != prevProps.match.params.userId) {
       this.refreshProfile();
     }
+    // if (this.props.error !== null) {
+    //   alert(this.props.error);
+    //   // <Error error={this.props.error} />;
+    // }
   }
 
   render() {
     return (
-      <Profile
-        {...this.props}
-        isOwner={!this.props.match.params.userId}
-        profile={this.props.profile}
-        status={this.props.status}
-        updateStatus={this.props.updateStatus}
-        savePhoto={this.props.savePhoto}
-      />
+      <>
+        {this.props.error ? <Error error={this.props.error} /> : null}
+        <Profile
+          {...this.props}
+          error={this.props.error}
+          isOwner={!this.props.match.params.userId}
+          profile={this.props.profile}
+          status={this.props.status}
+          updateStatus={this.props.updateStatus}
+          savePhoto={this.props.savePhoto}
+        />
+      </>
     );
   }
 }
@@ -57,6 +67,7 @@ let mapStateToProps = (state) => ({
   status: state.profilePage.status,
   authorizedUserId: state.auth.userId,
   isAuth: state.auth.isAuth,
+  error: state.profilePage.error,
 });
 
 function withRouter(Component) {

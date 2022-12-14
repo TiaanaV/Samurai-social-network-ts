@@ -1,0 +1,19 @@
+.errorBox {
+  position: absolute;
+  margin: 0 auto;
+  top: 10%;
+  right: 30%;
+  width: 700px;
+  height: 500px;
+  box-sizing: border-box;
+  text-align: center;
+  border: solid rgb(214, 103, 103) 5px;
+  border-radius: 13% 13%;
+  background-color: rgb(253, 253, 253, 0.85);
+  white-space: pre-line;
+}
+
+/* .errorType {
+  text-align: center;
+  border: solid red 1px;
+} */

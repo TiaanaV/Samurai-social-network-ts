@@ -1,10 +1,14 @@
 import { getAuthUserData } from "./authReducer";
 
 
-const INITIALIZED_SUCCESS= 'INITIALIZED_SUCCESS';
+const INITIALIZED_SUCCESS = 'app/INITIALIZED_SUCCESS';
+const HAS_GLOBAL_ERROR = 'app/HAS_GLOBAL_ERROR';
+const GLOBAL_ERROR_TEXT = 'app/GLOBAL_ERROR_TEXT';
 
 let initialState = {
     initialized: false,
+    globalError:null,
+    errorText:null,
 }
 const appReducer = (state = initialState,action) => {
     switch(action.type){
@@ -13,6 +17,13 @@ const appReducer = (state = initialState,action) => {
                 ...state,
                 initialized:true
             };
+        case HAS_GLOBAL_ERROR:
+        case GLOBAL_ERROR_TEXT:
+             return{
+                ...state,
+                ...action.payload
+            };
+            
        
             default:
                 return state;
@@ -20,7 +31,9 @@ const appReducer = (state = initialState,action) => {
 }
 
 
-export const initializedSuccess =() => ({type:INITIALIZED_SUCCESS});
+export const initializedSuccess = () => ({type:INITIALIZED_SUCCESS});
+ const hasGlobalError = (globalError) => ({type:HAS_GLOBAL_ERROR,payload:{globalError}});
+const globalErrorText = (errorText) => ({type:HAS_GLOBAL_ERROR,payload:{errorText}});
 
 export const initializeApp = () => (dispatch) => {
     let promise = dispatch(getAuthUserData());
@@ -29,6 +42,11 @@ export const initializeApp = () => (dispatch) => {
         dispatch(initializedSuccess())
         });
     };
+
+    // export const checkGlobalError = (reason,promiseRejectionEvent) => (dispatch) => {
+    //      dispatch(hasGlobalError(reason));
+    //      dispatch(globalErrorText(promiseRejectionEvent));
+    // }
 
 
 export default appReducer;
