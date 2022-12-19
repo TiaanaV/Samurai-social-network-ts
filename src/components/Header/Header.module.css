@@ -1,11 +1,46 @@
 .header {
   grid-area: h;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  align-items: center;
 }
 
 .logo {
   width: 70px;
+  margin-right: 20px;
+}
+
+.titleBlock {
+  margin-right: 770px;
+  color: rgb(4, 41, 91);
+}
+
+.title {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
 }
 
 .loginBlock {
   float: right;
+}
+
+.buttonLogin {
+  box-sizing: border-box;
+  font-family: inherit;
+  padding: 8px 12px;
+  border-radius: 2rem;
+  box-shadow: shadow(low);
+  border: 2px solid rgb(3, 91, 223);
+  background-color: rgb(3, 91, 223);
+  color: #fff;
+  font-size: 14px;
+  /* display: inline-flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.buttonLogin:hover {
+  background-color: #fff;
+  color: rgb(3, 91, 223);
 }
