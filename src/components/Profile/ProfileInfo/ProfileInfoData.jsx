@@ -7,7 +7,9 @@ const ProfileInfoData = (props) => {
     <div className={classes.profileInfo}>
       {props.isOwner && (
         <div>
-          <button onClick={props.goToEditMode}>Edit</button>
+          <button onClick={props.goToEditMode} className={classes.editButton}>
+            Edit
+          </button>
         </div>
       )}
       <div>

@@ -2,11 +2,12 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { required } from "../../utils/validators/validator";
 import { Input, Textarea } from "../common/FormsControl/FormsControl";
-import classes from "./../common/FormsControl/FormsControls.module.css";
+import styleField from "./../common/FormsControl/FormsControls.module.css";
+import classes from "./LoginForm.module.css";
 
 const LoginForm = (props) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={props.handleSubmit} className={classes.loginForm}>
       <div>
         <Field
           placeholder={"Email"}
@@ -14,6 +15,7 @@ const LoginForm = (props) => {
           typeField="input"
           name={"email"}
           validate={[required]}
+          className={classes.entryField}
         />
       </div>
       <div>
@@ -24,9 +26,10 @@ const LoginForm = (props) => {
           typefield="input"
           name={"password"}
           validate={[required]}
+          className={classes.entryField}
         />
       </div>
-      <div>
+      <div className={classes.checkbox}>
         <Field
           type={"checkbox"}
           component={Input}
@@ -36,7 +39,7 @@ const LoginForm = (props) => {
         remember me
       </div>
       {props.error && (
-        <div className={classes.formSummaryError}>{props.error}</div>
+        <div className={styleField.formSummaryError}>{props.error}</div>
       )}
       {props.captchaUrl ? <img src={props.captchaUrl} width={"200px"} /> : null}
       {props.captchaUrl ? (
@@ -49,7 +52,7 @@ const LoginForm = (props) => {
       ) : null}
 
       <div>
-        <button>Login</button>
+        <button className={classes.button}>Login</button>
       </div>
     </form>
   );

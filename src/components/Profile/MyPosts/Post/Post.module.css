@@ -1,9 +1,6 @@
 .item {
   display: grid;
   grid-template-columns: 60px 5fr 1fr;
-  /* display: flex;
-  flex-direction: row;
-  align-items: center; */
   margin-bottom: 5px;
   padding: 5px;
   font-size: 15px;

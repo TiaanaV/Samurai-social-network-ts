@@ -14,7 +14,7 @@ let Users = (props) => {
         onPageChanged={props.onPageChanged}
       />
       {props.users.map((u) => (
-        <div key={u.id}>
+        <div key={u.id} className={classes.users}>
           <span>
             <div>
               <NavLink to={"/profile/" + u.id}>

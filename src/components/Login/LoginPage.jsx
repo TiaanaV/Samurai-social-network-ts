@@ -3,6 +3,7 @@ import { Navigate } from "react-router";
 import React from "react";
 import { LoginReduxForm } from "./LoginForm";
 import { login } from "../../redux/authReducer";
+import classes from "./LoginForm.module.css";
 
 const LoginPage = (props) => {
   const onSubmit = (formDate) => {
@@ -19,8 +20,8 @@ const LoginPage = (props) => {
   }
 
   return (
-    <div>
-      <h1>LOGIN</h1>
+    <div className={classes.loginForm}>
+      <h1 className={classes.pageTitle}>LOGIN</h1>
       <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
     </div>
   );

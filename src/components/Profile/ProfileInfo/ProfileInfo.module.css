@@ -11,3 +11,35 @@
 .contacts {
   padding-left: 10px;
 }
+
+.editButton {
+  box-sizing: border-box;
+  font-family: inherit;
+  padding: 6px 18px;
+  margin-bottom: 10px;
+  border-radius: 2rem;
+  box-shadow: shadow(low);
+  border: 1px solid rgb(3, 91, 223);
+  background-color: #fff;
+  color: rgb(3, 91, 223);
+  font-size: 14px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.editButton:hover {
+  background-color: rgb(3, 91, 223);
+  color: #fff;
+}
+
+.selectPhotoBlock {
+  margin-bottom: 10px;
+}
+
+.selectPhotoBlock:first-child {
+  background-color: #fff;
+}

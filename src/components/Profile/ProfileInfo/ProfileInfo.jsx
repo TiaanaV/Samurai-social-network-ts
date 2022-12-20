@@ -33,7 +33,7 @@ const ProfileInfo = (props) => {
           src={props.profile.photos.large || userPhoto}
         />
         {props.isOwner && (
-          <form>
+          <form className={classes.selectPhotoBlock}>
             <input type={"file"} onChange={onAvatarPhotoSelected} />
           </form>
         )}

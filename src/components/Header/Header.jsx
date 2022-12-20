@@ -12,16 +12,18 @@ const Header = (props) => {
       <div className={classes.titleBlock}>
         <h2 className={classes.title}>Samurai Network</h2>
       </div>
-      <div className={classes.loginBlock}>
+      <div>
         {props.isAuth ? (
-          <div>
-            {props.login}{" "}
-            <button className={classes.buttonLogin} onClick={props.logout}>
+          <div className={classes.loginBlock}>
+            <button className={classes.buttonLogout} onClick={props.logout}>
               Log out
             </button>
+            <p className={classes.userName}>{props.login}</p>
           </div>
         ) : (
-          <NavLink to={"/login"}>Login</NavLink>
+          <NavLink className={classes.login} to={"/login"}>
+            Login
+          </NavLink>
         )}
       </div>
     </header>

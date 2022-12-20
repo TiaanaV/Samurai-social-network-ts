@@ -1,0 +1,40 @@
+.loginForm {
+  padding-left: 20px;
+}
+
+.pageTitle {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 300;
+}
+
+.button {
+  box-sizing: border-box;
+  font-family: inherit;
+  padding: 8px 10px;
+  border-radius: 2rem;
+  box-shadow: shadow(low);
+  border: 1px solid rgb(3, 91, 223);
+  background-color: #fff;
+  color: rgb(3, 91, 223);
+  font-size: 14px;
+}
+
+.button:hover {
+  background-color: rgb(3, 91, 223);
+  color: #fff;
+}
+
+.entryField {
+  margin-bottom: 5px;
+  padding: 5px 15px;
+  font-size: 15px;
+  background-color: #fff;
+  border: 1px solid rgb(45, 80, 133);
+  border-radius: 2rem;
+  color: rgb(11, 11, 11);
+}
+
+.checkbox {
+  display: flex;
+  margin-bottom: 20px;
+}

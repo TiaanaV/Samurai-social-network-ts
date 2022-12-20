@@ -1,6 +1,9 @@
 .dialogs {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  grid-template-areas:
+    "users messages"
+    "users newMessage";
 }
 
 .dialogsItems {
@@ -8,6 +11,7 @@
 }
 
 .messages {
+  grid-area: "messages";
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -17,16 +21,17 @@
 }
 
 .newMessageArea {
+  grid-area: "newMessage";
+  background-color: aqua;
   display: flex;
   flex-direction: row;
   align-items: baseline;
   justify-content: flex-end;
-
-  width: 100%;
+  /* position: relative; */
 }
 .newMessage {
   display: flex;
-  align-self: flex-start;
+  align-self: flex-end;
   width: 80%;
   height: 30px;
   border: 1px solid gray;
@@ -44,8 +49,8 @@
 .buttonSend {
   /* position: absolute;
   top: 6px;
-  right: 0; */
-  /* box-sizing: border-box; */
+  right: -750px; */
+  box-sizing: border-box;
 
   font-family: inherit;
   padding: 5px 13px;
