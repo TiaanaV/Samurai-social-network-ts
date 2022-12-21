@@ -51,7 +51,7 @@ class App extends React.Component{
             <div className={classes.appWrapperContent}>
             <Suspense fallback={<Preloader />}>
               <Routes>
-                <Route path="/" element={<Navigate to="/profile" />} />
+                <Route path="/First-project-on-react/" element={<Navigate to="/profile" />} />
                 <Route path="/profile/:userId" element={<ProfileContainer/>}/>
                 <Route path="/profile/*" element={<ProfileContainer/>}/>
                 <Route path="/dialogs/*" element={<DialogsContainer/>} />
