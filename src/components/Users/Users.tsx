@@ -2,9 +2,22 @@ import React from "react";
 import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/user-icon.png";
 import { NavLink } from "react-router-dom";
-import Paginator from "../common/Paginator/Paginator";
+import { Paginator } from "../common/Paginator/Paginator";
+import { PhotosType, UsersType } from "../../types common/types";
 
-let Users = (props) => {
+type PropsType = {
+  totalUsersCount:number
+  pageSize:number
+  currentPage:number
+  users:Array<UsersType>
+  followingInProgress:Array<number>
+
+  onPageChanged: (currentPage:number) => void
+  unfollow: (userId: number | null) => void
+  follow: (userId: number | null) => void
+}
+
+let Users:React.FC<PropsType> = (props) => {
   return (
     <div>
       <Paginator

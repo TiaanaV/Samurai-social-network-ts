@@ -18,13 +18,30 @@ import {
   getTotalUsersCount,
   getUsersSuper,
 } from "../../redux/users-selectors";
+import { PhotosType, UsersType } from "../../types common/types";
 
-class UsersContainer extends React.Component {
+type PropsType = {
+  totalUsersCount:number
+  pageSize:number
+  currentPage:number
+  users:Array<UsersType>
+  isFetching: boolean
+  followingInProgress:Array<number>
+
+  onPageChanged: (currentPage:number) => void
+  unfollow: (userId: number | null) => void
+  follow: (userId: number | null) => void
+  getUsers: (currentPage:number,pageSize:number) => void
+  setCurrentPage: (pageNumber:number) => void
+}
+
+class UsersContainer extends React.Component<PropsType> {
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    const {currentPage,pageSize} = this.props
+    this.props.getUsers(currentPage, pageSize);
   }
 
-  onPageChanged = (pageNumber) => {
+  onPageChanged = (pageNumber:number) => {
     this.props.getUsers(pageNumber, this.props.pageSize);
     this.props.setCurrentPage(pageNumber);
   };

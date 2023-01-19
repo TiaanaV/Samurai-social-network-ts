@@ -1,8 +1,14 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./Header.module.css";
 
-const Header = (props) => {
+type PropsType = {
+  isAuth:Boolean
+  login:string
+  logout:MouseEventHandler<HTMLButtonElement> /// авто исправление 
+}
+
+const Header = (props:PropsType) => {
   return (
     <header className={classes.header}>
       <img
