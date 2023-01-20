@@ -67,17 +67,17 @@ const usersReducer = (state = initialState,action:any):InitialStateType => {
 }
 
 type FollowSuccessActionType = {
-    userId:number
+    userId:number | null
     type: typeof FOLLOWED
 }
 
-export const followSuccess = (userId:number):FollowSuccessActionType => ({type: FOLLOWED, userId});
+export const followSuccess = (userId:number | null):FollowSuccessActionType => ({type: FOLLOWED, userId});
 
 type UnfollowSuccessActionType = {
-    userId:number
+    userId:number | null
     type: typeof UNFOLLOW
 }
-export const unfollowSuccess=(userId:number):UnfollowSuccessActionType =>( {type:UNFOLLOW,userId});
+export const unfollowSuccess=(userId:number | null):UnfollowSuccessActionType =>( {type:UNFOLLOW,userId});
 
 type SetUsersActionType = {
     users:Array<UsersType>
@@ -111,7 +111,7 @@ type ToggleFollowingProgressActionType = {
 }
 export const toggleFollowingProgress = (isFetching:boolean,userId:number):ToggleFollowingProgressActionType =>( {type:TOGGLE_IS_FOLLOWING_PROGRESS,isFetching,userId});
 
-export const getUsers = (page:number,pageSize:number) => async(dispatch:any) =>{   dispatch(toggleIsFetching(true));
+export const getUsers = (page:number,pageSize:number) => async(dispatch:any) =>{dispatch(toggleIsFetching(true));
     setCurrentPage(page);
    let data = await usersAPI.getUsers(page,pageSize)
             dispatch(toggleIsFetching(false));

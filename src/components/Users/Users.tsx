@@ -31,10 +31,10 @@ let Users:React.FC<PropsType> = (props) => {
           <span>
             <div>
               <NavLink to={"/profile/" + u.id}>
-                <img
+                {/* <img
                   className={classes.avatarUsers}
                   src={u.photos.small != null ? u.photos.small : userPhoto}
-                />
+                /> */}
               </NavLink>
             </div>
             <div>
