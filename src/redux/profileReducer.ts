@@ -1,7 +1,9 @@
 
 import { stopSubmit } from "redux-form";
+import { ThunkAction } from "redux-thunk";
 import { profileAPI } from "../api/api";
 import { PhotosType, PostsType, ProfileType } from "../types common/types";
+import { AppStateType } from "./redux-store";
 
 
 const ADD_POST='profilePage/ADD-POST';
@@ -27,7 +29,7 @@ let initialState = {
 }
 
 export type InitialStateType = typeof initialState
-const profileReducer = (state = initialState,action:any):InitialStateType => {
+const profileReducer = (state = initialState,action:ActionsTypes):InitialStateType => {
 
     switch(action.type){
         case ADD_POST:{
@@ -62,17 +64,13 @@ const profileReducer = (state = initialState,action:any):InitialStateType => {
                 ...action.payload
             }
         }
-        // case CLEAN_ERROR:{
-        //     return{
-        //         ...state,
-        //         ...action.payload = null
-        //     } 
-        // }
 
         default:
             return state;
         } 
     }
+
+   type ActionsTypes = AddPostActionCreatorType|DeletePostActionType|SetStatusActionType|SetUserProfileActionType|SavePhotoSuccessActionType|HasErrorActionType
 
     type AddPostActionCreatorType = {
         type: typeof ADD_POST
@@ -104,30 +102,27 @@ const profileReducer = (state = initialState,action:any):InitialStateType => {
      }
      const savePhotoSuccess =(photos:PhotosType):SavePhotoSuccessActionType => ({type:SAVE_PHOTO_SUCCESS,photos});
 
-     type ErrorType = {
-      message:string
-     }
      type HasErrorActionType = {
         type:typeof HAS_ERROR
-        payload:{error:ErrorType | null}
+        payload:{error: string }
      }
-     const hasError = (error:ErrorType | null):HasErrorActionType => ({type:HAS_ERROR,payload:{error}});
-    //  const cleanError = (error) => ({type:CLEAN_ERROR,payload:{error}}); 
+     const hasError = (error:string):HasErrorActionType => ({type:HAS_ERROR,payload:{error}});
+  
 
+    type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes >
 
-    export const getProfileInfo = (userId:number) => {
-        return (dispatch:any) =>{
-            profileAPI.getProfileInfo(userId).then((data:any) => {
-            dispatch(setUserProfile(data));
-            });
-        }
-    }
+    export const getProfileInfo = (userId:number):ThunkType => async (dispatch) =>{
+            let response = await profileAPI.getProfileInfo(userId) 
+             dispatch(getProfileInfo(response.data)) /// добавила getProfileInfo, возможно не нужно
+            dispatch(setUserProfile(response.data));
+            };
 
-    export const getStatus = (userId:number) => async(dispatch:any) =>{
+    export const getStatus = (userId:number):ThunkType => async(dispatch ) =>{
         let response = await profileAPI.getStatus(userId)
             dispatch(setStatus(response.data));
         }
-    export const updateStatus = (status:string) => async(dispatch:any) =>{
+
+    export const updateStatus = (status:string):ThunkType => async(dispatch) =>{
         // try{
             let response = await profileAPI.updateStatus(status)
                  if(response.data.resultCode === 0){
@@ -144,14 +139,14 @@ const profileReducer = (state = initialState,action:any):InitialStateType => {
         //     }
         // }
         
-    export const savePhoto = (file:string) => async(dispatch:any) =>{
-         let response = await profileAPI.savePhoto(file)
-                if(response.data.resultCode === 0){
-                    dispatch(savePhotoSuccess(response.data.data.photos));
+ export const savePhoto = (file:string):ThunkType => async(dispatch) =>{
+        let response = await profileAPI.savePhoto(file)
+            if(response.data.resultCode === 0){
+                dispatch(savePhotoSuccess(response.data.data.photos));
                 }
          }
 
- export const saveProfile = (profile:ProfileType) => async(dispatch:any) =>{
+ export const saveProfile = (profile:ProfileType):ThunkType => async(dispatch) =>{
         const userId = 25786;
         let response = await profileAPI.saveProfile(profile);
 
@@ -165,9 +160,8 @@ const profileReducer = (state = initialState,action:any):InitialStateType => {
                      } else if ( errorType.includes("Contacts->")){
                         errorType = errorType.split('(Contacts->').join(": ").split(')',1);
                     }
-
-                    dispatch(stopSubmit("profile-edit",{_error: errorType}))
-                    return Promise.reject(response.data.messages[0])
+                    // dispatch(stopSubmit("profile-edit",{_error: errorType}))
+                    // return Promise.reject(response.data.messages[0])
                 }
             }
         
@@ -175,3 +169,4 @@ const profileReducer = (state = initialState,action:any):InitialStateType => {
     
 
 export default profileReducer;  
+
