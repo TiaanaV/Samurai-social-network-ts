@@ -1,7 +1,11 @@
 import React from "react";
 import classes from "./Error.module.css";
 
-const Error = (props) => {
+type PropsType = {
+  error:string
+}
+
+const Error:React.FC<PropsType> = (props) => {
   return (
     <div className={classes.errorBox}>
       <h3>

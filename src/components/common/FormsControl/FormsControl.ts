@@ -2,7 +2,12 @@ import React from "react";
 import { Field } from "redux-form";
 import classes from "./FormsControls.module.css";
 
-const FormControl = (props) => {
+// type PropsType = {
+//     meta.touched:boolean
+//     meta.error:string
+// }
+
+const FormControl:React.FC<PropsType> = (props) => {
     const hasError = props.meta.touched && props.meta.error
     return (
         <div className={classes.formControl + ' ' + (hasError ? classes.error : '')}>
