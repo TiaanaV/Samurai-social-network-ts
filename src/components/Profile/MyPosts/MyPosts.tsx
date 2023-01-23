@@ -3,17 +3,24 @@ import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { reduxForm } from "redux-form";
 import AddPostForm from "./AddPostForm";
+import { PostsType } from "../../../types common/types";
+
+type PropsType = {
+  posts:Array<PostsType>
+  addPost: (newPostText:string) => void
+  onSubmit: () => void
+}
 
 const AddPostFormRedux = reduxForm({ form: "my post" })(AddPostForm);
 
-const MyPosts = React.memo((props) => {
+const MyPosts:React.FC<PropsType> = React.memo((props) => {
   let postsElement = [...props.posts]
     .reverse()
     .map((p) => (
       <Post key={p.id} message={p.message} likeCount={p.likeCount} />
     ));
 
-  const addNewPost = (value) => {
+  const addNewPost = (value:string) => {
     props.addPost(value.newPostText);
   };
   return (
