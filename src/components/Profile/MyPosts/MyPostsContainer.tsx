@@ -19,14 +19,14 @@ type PropsType = MapStatePropsType & MapDispatchPropsType
 let mapStateToProps = (state:AppStateType):MapStatePropsType => {
   return {
     posts: state.profilePage.posts,
-    newPostText: state.profilePage.newPostText,
+    newPostText: state.profilePage.newPost.message, /// был newPostText  - но его нет в стейте - это пейлоад ActionCreator(a)
   };
 };
 
-let mapDispatchToProps = (dispatch:any) => {
+let mapDispatchToProps = (dispatch:any):MapDispatchPropsType => {
   return {
-    addPost: (newPostText: string) => {
-      dispatch(addPostActionCreator(newPostText));
+    addPost: (message: string) => {
+      dispatch(addPostActionCreator(message));  // был newPostText  - но его нет в стейте - это пейлоад ActionCreator(a)
     },
   };
 };

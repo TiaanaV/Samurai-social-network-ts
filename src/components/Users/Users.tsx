@@ -3,7 +3,7 @@ import classes from "./Users.module.css";
 import userPhoto from "../../assets/images/user-icon.png";
 import { NavLink } from "react-router-dom";
 import { Paginator } from "../common/Paginator/Paginator";
-import { PhotosType, UsersType } from "../../types common/types";
+import { UsersType } from "../../types common/types";
 
 type PropsType = {
   totalUsersCount:number

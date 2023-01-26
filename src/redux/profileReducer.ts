@@ -1,7 +1,7 @@
 
 import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
-import { profileAPI } from "../api/api";
+import { profileAPI, ResultCodeEnum } from "../api/api";
 import { PhotosType, PostsType, ProfileType } from "../types common/types";
 import { AppStateType } from "./redux-store";
 
@@ -113,19 +113,19 @@ const profileReducer = (state = initialState,action:ActionsTypes):InitialStateTy
 
     export const getProfileInfo = (userId:number):ThunkType => async (dispatch) =>{
             let response = await profileAPI.getProfileInfo(userId) 
-             dispatch(getProfileInfo(response.data)) /// добавила getProfileInfo, возможно не нужно
+             //dispatch(getProfileInfo(response.data)) /// добавила getProfileInfo, возможно не нужно
             dispatch(setUserProfile(response.data));
             };
 
     export const getStatus = (userId:number):ThunkType => async(dispatch ) =>{
-        let response = await profileAPI.getStatus(userId)
-            dispatch(setStatus(response.data));
+        await profileAPI.getStatus(userId)
+          // dispatch(setStatus(response));///почему SET STATUS???
         }
 
     export const updateStatus = (status:string):ThunkType => async(dispatch) =>{
         // try{
             let response = await profileAPI.updateStatus(status)
-                 if(response.data.resultCode === 0){
+                 if(response.resultCode === ResultCodeEnum.Success){
                         dispatch(setStatus(status));
                     }
          } 
@@ -141,8 +141,8 @@ const profileReducer = (state = initialState,action:ActionsTypes):InitialStateTy
         
  export const savePhoto = (file:string):ThunkType => async(dispatch) =>{
         let response = await profileAPI.savePhoto(file)
-            if(response.data.resultCode === 0){
-                dispatch(savePhotoSuccess(response.data.data.photos));
+            if(response.data.resultCode === ResultCodeEnum.Success){
+                dispatch(savePhotoSuccess(response.photos)); ///// тут ошибка 
                 }
          }
 
@@ -150,10 +150,10 @@ const profileReducer = (state = initialState,action:ActionsTypes):InitialStateTy
         const userId = 25786;
         let response = await profileAPI.saveProfile(profile);
 
-                if(response.data.resultCode === 0){
+                if(response.resultCode === ResultCodeEnum.Success){
                    dispatch(getProfileInfo(userId))
                 } else {
-                    let errorType = response.data.messages[0];
+                    let errorType = response.messages[0];
 
                     if(errorType.includes(".")){
                         errorType = errorType.split(".",1);
