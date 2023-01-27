@@ -8,6 +8,9 @@ import ProfileInfoDataForm from "./ProfileInfoDataForm";
 import { PhotosType, ProfileType } from "../../../types common/types";
 
 type PropsType = {
+  updateStatus: any;
+  status: string;
+  isOwner: boolean;
   profile:ProfileType
   savePhoto: (photos:PhotosType) => void
   saveProfile: (profile:ProfileType) => Promise<void>
@@ -38,7 +41,7 @@ const ProfileInfo:React.FC<PropsType> = (props) => {
       <div className={classes.descriptionBlock}>
         <img
           className={classes.avatar}
-          src={props.profile.photos.large || userPhoto}
+          src={props.profile.photos.large || userPhoto || undefined}
         />
         {props.isOwner && (
           <form className={classes.selectPhotoBlock}>
