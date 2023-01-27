@@ -5,21 +5,29 @@ import userPhoto from "../../../assets/images/user-icon.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import ProfileInfoData from "./ProfileInfoData";
 import ProfileInfoDataForm from "./ProfileInfoDataForm";
+import { PhotosType, ProfileType } from "../../../types common/types";
 
-const ProfileInfo = (props) => {
+type PropsType = {
+  profile:ProfileType
+  savePhoto: (photos:PhotosType) => void
+  saveProfile: (profile:ProfileType) => Promise<void>
+
+}
+
+const ProfileInfo:React.FC<PropsType> = (props) => {
   const [editMode, setEditMode] = useState(false);
 
   if (!props.profile) {
     return <Preloader />;
   }
 
-  const onAvatarPhotoSelected = (e) => {
+  const onAvatarPhotoSelected = (e:) => {
     if (e.target.files.length) {
       props.savePhoto(e.target.files[0]);
     }
   };
 
-  const onSubmit = (formDate) => {
+  const onSubmit = (formDate:ProfileType) => {
     props.saveProfile(formDate).then(() => {
       setEditMode(false);
     });

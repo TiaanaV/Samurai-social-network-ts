@@ -32,10 +32,10 @@ type MapStatePropsType = {
 
 type MapDispatchPropsType = {
   onPageChanged: (currentPage:number) => void
-  unfollow: (userId: number | null) => void
-  follow: (userId: number | null) => void
   getUsers: (currentPage:number,pageSize:number) => void
   setCurrentPage: (pageNumber:number) => void
+  unfollow: (userId: number | null) => void
+  follow: (userId: number | null) => void
 }
 
 type OwnPropsType = {
