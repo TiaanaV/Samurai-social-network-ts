@@ -1,31 +1,25 @@
-import React from "react";
-import { Field } from "redux-form";
-import { FieldValidatorType } from "../../../utils/validators/validator";
-import classes from "./FormsControls.module.css";
+import React from "react"
+import { Field, WrappedFieldMetaProps, WrappedFieldProps } from "redux-form"
+import { FieldValidatorType } from "../../../utils/validators/validator"
+import classes from "./FormsControls.module.css"
 
-type FormControlParamsType = {
-  meta:{
-    touched:boolean
-    error:string
-  }
-  children: React.ReactNode
+type FormControlPropsType = {
+  meta: WrappedFieldMetaProps
 };
 
-type FormControlType = (params:FormControlParamsType) => React.ReactNode
-
-const FormControl:FormControlType = ({meta:{touched,error},children}) => {
-  const hasError = touched && error;
+const FormControl: React.FC<FormControlPropsType> = (props) => {
+  const hasError = props.meta.touched && props.meta.error;
   return (
     <div
       className={classes.formControl + " " + (hasError ? classes.error : "")}
     >
-      {props.children}
-      <div>{hasError && <span>{props.meta.error}</span>}</div>
+      <div>{children}</div>
+      {hasError && { error }}
     </div>
   );
 };
 
-export const Textarea = (props) => {
+export const Textarea: React.FC<WrappedFieldProps> = (props) => {
   return (
     <FormControl {...props}>
       <textarea {...props.input} {...props} />
@@ -41,7 +35,7 @@ export const Input = (props) => {
 };
 
 export const createField = (
-  placeholder: string,
+  placeholder: string|undefined,
   name: string,
   validators: Array<FieldValidatorType>,
   component: string | React.Component | React.FC,
@@ -49,10 +43,12 @@ export const createField = (
   text = ""
 ) => (
   <div>
-    <Field placeholder={placeholder}
+    <Field
+      placeholder={undefined}
       validators={validators}
       component={component}
       {...props}
-    />{text}
+    />
+    {text}
   </div>
-  );
+);
