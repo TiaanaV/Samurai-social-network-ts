@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { actionTypes } from "redux-form";
 import { ThunkAction } from "redux-thunk";
-import { usersAPI } from "../api/api";
+import { usersAPI } from "../../src/api/users-api";
 import { UsersType } from "../types common/types";
 import { AppStateType, InferActionsTypes } from "./redux-store";
 
@@ -67,7 +67,7 @@ const usersReducer = (
   type ActionsTypes = InferActionsTypes<typeof actions>
   
   export const actions = {
-  followSuccess:(userId: number | null) => ({ type: 'FOLLOWED', userId } as const),
+   followSuccess:(userId: number | null) => ({ type: 'FOLLOWED', userId } as const),
    unfollowSuccess:(userId: number | null) => ({ type: 'UNFOLLOW', userId } as const),
    setUsers:(users: Array<UsersType>) => ({type: 'SET_USERS', users,} as const),
    setCurrentPage:(currentPage: number) => ({ type: 'SET_CURRENT_PAGE',currentPage } as const),

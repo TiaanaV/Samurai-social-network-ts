@@ -1,7 +1,8 @@
 
 import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
-import { profileAPI, ResultCodeEnum } from "../api/api";
+import { ResultCodeEnum } from "../api/api";
+import {profileAPI} from "../api/profile-api";
 import { PhotosType, PostsType, ProfileType } from "../types common/types";
 import { AppStateType } from "./redux-store";
 
@@ -114,35 +115,35 @@ const profileReducer = (state = initialState,action:ActionsTypes):InitialStateTy
     export const getProfileInfo = (userId:number):ThunkType => async (dispatch) =>{
             let response = await profileAPI.getProfileInfo(userId) 
              //dispatch(getProfileInfo(response.data)) /// добавила getProfileInfo, возможно не нужно
-            dispatch(setUserProfile(response.data));
+            dispatch(setUserProfile(response));
             };
 
     export const getStatus = (userId:number):ThunkType => async(dispatch ) =>{
-        await profileAPI.getStatus(userId)
-          // dispatch(setStatus(response));///почему SET STATUS???
+        let response = await profileAPI.getStatus(userId)
+           dispatch(setStatus(response));
         }
 
     export const updateStatus = (status:string):ThunkType => async(dispatch) =>{
-        // try{
+        try{
             let response = await profileAPI.updateStatus(status)
                  if(response.resultCode === ResultCodeEnum.Success){
                         dispatch(setStatus(status));
                     }
          } 
-        //  catch(error) {
-        //     let errorMessage = error.message;
-        //     if(/\d/g.test(errorMessage)){
-        //         errorMessage="There was some unexpected error. We are already trying to fix it."
-        //     }
-        //     dispatch(hasError(errorMessage))
-        //     setTimeout(() => dispatch(hasError(null)),2000)
-        //     }
-        // }
+         catch(error) {
+            // let errorMessage = error.message;
+            // if(/\d/g.test(errorMessage)){
+            //     errorMessage="There was some unexpected error. We are already trying to fix it."
+            // }
+            // dispatch(hasError(errorMessage))
+            // setTimeout(() => dispatch(hasError(null)),2000)
+            // }
+        }
         
  export const savePhoto = (file:string):ThunkType => async(dispatch) =>{
         let response = await profileAPI.savePhoto(file)
-            if(response.data.resultCode === ResultCodeEnum.Success){
-                dispatch(savePhotoSuccess(response.photos)); ///// тут ошибка 
+            if(response.resultCode === ResultCodeEnum.Success){
+                dispatch(savePhotoSuccess(response.data.photos));
                 }
          }
 
@@ -156,9 +157,9 @@ const profileReducer = (state = initialState,action:ActionsTypes):InitialStateTy
                     let errorType = response.messages[0];
 
                     if(errorType.includes(".")){
-                        errorType = errorType.split(".",1);
+                        errorType.split(".",1);
                      } else if ( errorType.includes("Contacts->")){
-                        errorType = errorType.split('(Contacts->').join(": ").split(')',1);
+                        errorType.split('(Contacts->').join(": ").split(')',1);
                     }
                     // dispatch(stopSubmit("profile-edit",{_error: errorType}))
                     // return Promise.reject(response.data.messages[0])

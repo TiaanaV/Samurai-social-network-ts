@@ -41,7 +41,7 @@ const ProfileInfo:React.FC<PropsType> = (props) => {
       <div className={classes.descriptionBlock}>
         <img
           className={classes.avatar}
-          src={props.profile.photos.large || userPhoto || undefined}
+          src={props.profile.photos.large || userPhoto}
         />
         {props.isOwner && (
           <form className={classes.selectPhotoBlock}>

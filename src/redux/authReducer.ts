@@ -1,6 +1,8 @@
  import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
-import { authAPI, ResultCodeEnum, ResultCodeForCaptcha, securityAPI } from "../api/api";
+import { ResultCodeEnum, ResultCodeForCaptchaEnum } from "../api/api";
+import {securityAPI} from "../api/security-api"
+import {authAPI} from "../api/auth-api"
 import { AppStateType } from "./redux-store";
 
 const SET_USER_DATA = 'auth/SET_USER_DATA';
@@ -43,7 +45,7 @@ type SetAuthUserDataActionType = {
     payload: SetAuthUserDataActionPayloadType
 }
 
-const setAuthUserData =(id:number | null,email:string | null,login:string | null,isAuth:boolean):SetAuthUserDataActionType => ({type: SET_USER_DATA, payload:{id,email,login,isAuth}});
+const setAuthUserData = (id:number | null,email:string | null,login:string | null,isAuth:boolean):SetAuthUserDataActionType => ({type: SET_USER_DATA, payload:{id,email,login,isAuth}});
 
 type SetCaptchaUrlSuccessActionType = {
     type: typeof GET_CAPTCHA_URL_SUCCESS
@@ -68,7 +70,7 @@ export const login =(email:string,password:string,rememberMe:boolean,captcha:nul
                     dispatch(getAuthUserData()
                     );
                 } else{
-                    if(response.resultCode === ResultCodeForCaptcha.CaptchaIsRequired){
+                    if(response.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired){
                         dispatch(getCaptchaUrl())
                     }
                 let message = response.messages.length > 0 ? response.messages[0] : "Some error";

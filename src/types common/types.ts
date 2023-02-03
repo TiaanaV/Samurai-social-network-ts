@@ -28,6 +28,7 @@ export type ContactsType = {
     mainLink: string
 }
 export type ProfileType = {
+    data(data: any): { type: "profilePage/SET_USER_PROFILE"; profile: ProfileType }
     userId?:number 
     lookingForAJob?:boolean
     lookingForAJobDescription?: string 
