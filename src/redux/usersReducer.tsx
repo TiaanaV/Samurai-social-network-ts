@@ -3,7 +3,7 @@ import { actionTypes } from "redux-form";
 import { ThunkAction } from "redux-thunk";
 import { usersAPI } from "../../src/api/users-api";
 import { UsersType } from "../types common/types";
-import { AppStateType, InferActionsTypes } from "./redux-store";
+import { AppStateType, BaseThunkType, InferActionsTypes } from "./redux-store";
 
 let initialState = {
   users: [] as Array<UsersType>,
@@ -80,16 +80,11 @@ const usersReducer = (
 
 // type GetStateType = () => AppStateType;
 // type DispatchType = () => Dispatch<ActionsTypes>;
-type ThunkType = ThunkAction<
-  Promise<void>,
-  AppStateType,
-  unknown,
-  ActionsTypes
->;
+type ThunkType = BaseThunkType<ActionsTypes >
+
 
 export const getUsers = (page: number, pageSize: number): ThunkType => async (
-  dispatch,
-  getState
+  dispatch
 ) => {
   dispatch(actions.toggleIsFetching(true));
   actions.setCurrentPage(page);
