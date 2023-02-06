@@ -1,9 +1,6 @@
-import { Dispatch } from "react";
-import { actionTypes } from "redux-form";
-import { ThunkAction } from "redux-thunk";
 import { usersAPI } from "../../src/api/users-api";
 import { UsersType } from "../types common/types";
-import { AppStateType, BaseThunkType, InferActionsTypes } from "./redux-store";
+import { BaseThunkType, InferActionsTypes } from "./redux-store";
 
 let initialState = {
   users: [] as Array<UsersType>,
@@ -16,10 +13,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState;
 
-const usersReducer = (
-  state = initialState,
-  action: ActionsTypes
-): InitialStateType => {
+const usersReducer = (state = initialState,action: ActionsTypes): InitialStateType => {
   switch (action.type) {
     case 'FOLLOWED':
       return {
@@ -78,10 +72,7 @@ const usersReducer = (
 }
 
 
-// type GetStateType = () => AppStateType;
-// type DispatchType = () => Dispatch<ActionsTypes>;
 type ThunkType = BaseThunkType<ActionsTypes >
-
 
 export const getUsers = (page: number, pageSize: number): ThunkType => async (
   dispatch

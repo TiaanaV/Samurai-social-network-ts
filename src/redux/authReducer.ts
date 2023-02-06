@@ -16,7 +16,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState
 type ActionsTypes = InferActionsTypes<typeof actions>
-type ThunkType<ExtraActionsType extends Action> = BaseThunkType<ActionsTypes | ExtraActionsType>
+type ThunkType = BaseThunkType<ActionsTypes | ReturnType<typeof stopSubmit>>
 
 
 const authReducer = (state = initialState,action:ActionsTypes):InitialStateType => {
@@ -56,7 +56,7 @@ export const login =(email:string,password:string,rememberMe:boolean,captcha:nul
                         dispatch(getCaptchaUrl())
                     }
                 let message = response.messages.length > 0 ? response.messages[0] : "Some error";
-                    dispatch(stopSubmit("login", {_error:message})) /// REdux FOrm в ActionsTypes нет stopSubmit
+                    dispatch(stopSubmit("login", {_error:message}))
                 } 
     }
 

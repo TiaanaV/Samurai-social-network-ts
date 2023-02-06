@@ -21,7 +21,7 @@ export const profileAPI = {
       )
 
     },
-   async savePhoto(photoFile:any){
+   async savePhoto(photoFile:File){
       const formData = new FormData();
       formData.append("image",photoFile);
 

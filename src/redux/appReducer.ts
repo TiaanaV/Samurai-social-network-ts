@@ -1,4 +1,4 @@
-import { ThunkAction } from "redux-thunk";
+
 import { getAuthUserData } from "./authReducer";
 import { AppStateType, BaseThunkType, InferActionsTypes } from "./redux-store";
 
@@ -40,7 +40,7 @@ export const actions = {
 }
 
 
-type ThunkType = BaseThunkType<ActionsTypes >
+type ThunkType = BaseThunkType<ActionsTypes>
 
 export const initializeApp = ():ThunkType => (dispatch) => {
     let promise = dispatch(getAuthUserData());
