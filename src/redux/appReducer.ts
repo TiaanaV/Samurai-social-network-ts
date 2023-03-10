@@ -42,7 +42,7 @@ export const actions = {
 
 type ThunkType = BaseThunkType<ActionsTypes>
 
-export const initializeApp = ():ThunkType => (dispatch) => {
+export const initializeApp = ():ThunkType => async(dispatch) => {
     let promise = dispatch(getAuthUserData());
  Promise.all([promise])
     .then(() => {

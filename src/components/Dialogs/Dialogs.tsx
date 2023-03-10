@@ -1,11 +1,22 @@
 import React from "react";
 import classes from "./Dialogs.module.css";
 import DialogItem from "./DIalogsItem/DialogItem";
-import Message from "../Dialogs/Message/Message";
+import Message from "./Message/Message";
 import { reduxForm } from "redux-form";
 import AddMessageForm from "./AddMessageForm";
+import { InitialStateType } from "../../redux/dialogsReducer";
 
-const Dialogs = (props) => {
+type PropsType = {
+  dialogsPage:InitialStateType
+  sendMessage: (messageText:string) => void
+}
+
+export type NewMessageFormType = {
+  newMessageBody:string
+}
+
+
+const Dialogs:React.FC<PropsType> = (props) => {
   let dialogsElements = props.dialogsPage.dialogs.map((dialog) => (
     <DialogItem
       avatar={dialog.avatar}
@@ -23,7 +34,7 @@ const Dialogs = (props) => {
     />
   ));
 
-  const addNewMessage = (values) => {
+  const addNewMessage = (values: NewMessageFormType) => {
     props.sendMessage(values.newMessageBody);
   };
 
