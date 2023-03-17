@@ -11,7 +11,7 @@ type PropsType = {
   sendMessage: (messageText:string) => void
 }
 
-export type NewMessageFormType = {
+export type NewMessageFormValuesType = {
   newMessageBody:string
 }
 
@@ -34,7 +34,7 @@ const Dialogs:React.FC<PropsType> = (props) => {
     />
   ));
 
-  const addNewMessage = (values: NewMessageFormType) => {
+  const addNewMessage = (values: NewMessageFormValuesType) => {
     props.sendMessage(values.newMessageBody);
   };
 
