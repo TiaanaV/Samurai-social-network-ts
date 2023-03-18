@@ -12,7 +12,7 @@ import {  useParams } from "react-router-dom";
 import { compose } from "redux";
 import { initializeApp } from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
-import store from "./redux/redux-store";
+import store, { AppStateType } from "./redux/redux-store";
 import React, {Suspense} from "react";
 import NotFound from "./components/common/NotFound";
 
@@ -22,23 +22,25 @@ const News =  React.lazy(() => import("./components/News/News"));
 const Music  =  React.lazy(() => import("./components/Music/Music"));
 const Settings =  React.lazy(() => import("./components/Settings/Settings"));
 
-class App extends React.Component{
+type PropsType = ReturnType<typeof mapStateToProps>
 
-  catchAllUnhandledErrors = (reason,promiseRejectionEvent) => {
-     alert(reason,promiseRejectionEvent)
+class App extends React.Component<PropsType>{
+
+  catchAllUnhandledErrors = (e:PromiseRejectionEvent) => {
+     alert("Some error occurred")
     // если в AppReducer globalError есть (строка с типом ошибки или где ошибка), то показать компоненту Ошибки с текстом и распарсить строку как в profileReduser в thunk saveProfile
     // console.log(this.props.checkGlobalError(reason,promiseRejectionEvent))
 
     // .then(
     //   globalError===null ? null : <Error errorTypeText={this.props.errorTypeText}/>)
   }
-  componentDidMount() {
-    this.props.initializeApp();
-    window.addEventListener("unhandlerejection",this.catchAllUnhandledErrors)
-  }
-   componentWillUnmount(){
-    window.removeEventListener("unhandlerejection",this.catchAllUnhandledErrors)
-   }
+  // componentDidMount() {
+  //   this.props.initializeApp();
+  //   window.addEventListener("unhandlerejection", this.catchAllUnhandledErrors)
+  // }
+  //  componentWillUnmount(){
+  //   window.removeEventListener("unhandlerejection",this.catchAllUnhandledErrors)
+  //  }
     render(){
       if(!this.props.initialized){
        return <Preloader/>
@@ -71,27 +73,28 @@ class App extends React.Component{
 }
 
 
-const withRouter = WrappedComponent => props => {
-  const params = useParams();
-  return (
-      <WrappedComponent
-          {...props}
-          params={params}
-      />
-  );
-};
+// const withRouter = (WrappedComponent: JSX.IntrinsicAttributes) => (props: JSX.IntrinsicAttributes) => {
+//   const params = useParams();
+//   return (
+//       <WrappedComponent
+//           {...props}
+//           params={params}
+//       />
+//   );
+// };
 
-let WithUrlDataContainerComponent = withRouter(App);
+// let WithUrlDataContainerComponent = withRouter(App);
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state:AppStateType) => ({
   initialized:state.app.initialized,
 })
-  const AppContainer =  compose(connect(mapStateToProps, {initializeApp})(WithUrlDataContainerComponent));
+const AppContainer = compose<React.ComponentType>(connect(mapStateToProps, {initializeApp})(App));
   
- const MainApp = (props) => {
+
+const MainApp:React.FC = () => {
   return <BrowserRouter>
             <Provider store={store}>
-              <AppContainer />
+              <AppContainer/>
             </Provider>
          </BrowserRouter>
   }

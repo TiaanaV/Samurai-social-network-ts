@@ -2,8 +2,7 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import DialogItem from "./DIalogsItem/DialogItem";
 import Message from "./Message/Message";
-import { reduxForm } from "redux-form";
-import AddMessageForm from "./AddMessageForm";
+import { AddMessageFormRedux } from "./AddMessageForm";
 import { InitialStateType } from "../../redux/dialogsReducer";
 
 type PropsType = {
@@ -48,7 +47,3 @@ const Dialogs:React.FC<PropsType> = (props) => {
 };
 
 export default Dialogs;
-
-export const AddMessageFormRedux = reduxForm({ form: "dialogAddMessageForm" })(
-  AddMessageForm
-);
